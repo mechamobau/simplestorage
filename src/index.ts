@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 /**
  * Interface used to mock the Storage API
@@ -48,6 +48,15 @@ const defaultOptions: Options = {
 export const useStorage = (key: string, options: Options = defaultOptions) => {
   const { storage = window.localStorage, placeholder } = options;
 
+  const [value, setValue] = useState<string>(() => {
+    const persistedValue = storage.getItem(key);
+    if (persistedValue === null) {
+      storage.setItem(key, placeholder);
+      return placeholder;
+    }
+    return persistedValue;
+  });
+
   /**
    * Function to change the value inside the Storage and in the State of Hook.
    * @param newValue - value to change on Storage
@@ -56,16 +65,6 @@ export const useStorage = (key: string, options: Options = defaultOptions) => {
     setValue(newValue);
     storage.setItem(key, newValue);
   };
-
-  const [value, setValue] = useState<string | null>(placeholder);
-
-  useEffect(() => {
-    if (value) storage.setItem(key, value);
-  }, [value]);
-
-  useEffect(() => {
-    setValue(storage.getItem(key));
-  }, [storage.getItem(key)]);
 
   return [value, setStorageValue] as const;
 };
