@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["es2019", "dom"],
+    "target": "es2019",
+
+    // Configuration for module.
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    // Configuration for type strictness.
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "jsx": "react"
+  },
+  "include": [".bilirc.ts", "src/"]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "simplestorage",
+  "version": "0.0.0",
+  "description": "",
+  "cdn": "dist/index.umd.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "unpkg": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "jsdelivr": "dist/index.umd.js",
+  "umd:main": "dist/index.umd.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/enzyme": "^3.10.4",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.6",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "bili": "^4.8.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "react": "^16.12.0",
+    "rollup-plugin-typescript2": "^0.24.0",
+    "ts-jest": "^24.0.2",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-markdown": "^2.1.7",
+    "typescript": "^3.7.4"
+  },
+  "scripts": {
+    "doc": "typedoc src/index.ts",
+    "test": "yarn test:lint && yarn test:unit",
+    "test:lint": "prettier **/*.{ts,tsx,js,jsx,json} --check",
+    "test:unit": "jest",
+    "lint": "prettier **/*.{ts,tsx,js,jsx,json} --write",
+    "build": "bili",
+    "prepublishOnly": "yarn doc && yarn build && yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mechamobau/simplestorage.git"
+  },
+  "keywords": [
+    "typescript",
+    "boilerplate",
+    "library"
+  ],
+  "author": {
+    "name": "Lucas Viana"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mechamobau/simplestorage/issues"
+  },
+  "homepage": "https://github.com/mechamobau/simplestorage#readme"
+}
