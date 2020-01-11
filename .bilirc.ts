@@ -5,7 +5,7 @@ const configuration: Configuration = {
   input: 'src/index.ts',
   output: {
     format: ['es', 'cjs', 'umd', 'umd-min'],
-    moduleName: '[libraryCammelCaseName]',
+    moduleName: 'simpleStorage',
     sourceMap: true
   },
   babel: {
@@ -17,7 +17,8 @@ const configuration: Configuration = {
       tsconfig: 'tsconfig.bundle.json',
       useTsconfigDeclarationDir: true
     }
-  }
+  },
+  externals: ['react']
 };
 
 export default configuration;

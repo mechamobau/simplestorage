@@ -1,34 +1,63 @@
 /*!
- * [libraryName] v0.0.0
- * (c) [authorFullName]
+ * simplestorage v0.0.0
+ * (c) Lucas Viana
  * Released under the MIT License.
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global['[libraryCammelCaseName]'] = {}));
-}(this, function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+  (global = global || self, factory(global.simpleStorage = {}, global.react));
+}(this, (function (exports, react) { 'use strict';
 
   /**
-   * Check if value is parseable to number.
-   * @example ```ts
-   * isNumberParseable('AAAA');
-   * //=> false
-   *
-   * isNumberParseable('100');
-   * //=> true
-   *
-   * if (!isNumberParseable(value))
-   *   throw new Error('Value can\'t be parseable to `Number`.')
-   * return Number(value);
-   * ```
-   * @param value - An `unknown` value to be checked.
+   * Default values for options in **useStorage**
    */
-  var isNumberParseable = function (value) { return !Number.isNaN(Number(value)); };
 
-  exports.isNumberParseable = isNumberParseable;
+  var defaultOptions = {
+    storage: window.localStorage,
+    placeholder: ''
+  };
+  /**
+   * React Hook used to get an interface with LocalStorage or another API. The
+   * params used are the `key` to access the value and `options` used to
+   * determinate the placeholder value and the storage API.
+   * @param key - Key used to access the LocalStorage value
+   * @param options - Options of **useStorage**
+   */
+
+  var useStorage = function (key, options) {
+    if ( options === void 0 ) options = defaultOptions;
+
+    var storage = options.storage; if ( storage === void 0 ) storage = window.localStorage;
+    var placeholder = options.placeholder;
+    var ref = react.useState(function () {
+      var persistedValue = storage.getItem(key);
+
+      if (persistedValue === null) {
+        storage.setItem(key, placeholder);
+        return placeholder;
+      }
+
+      return persistedValue;
+    });
+    var value = ref[0];
+    var setValue = ref[1];
+    /**
+     * Function to change the value inside the Storage and in the State of Hook.
+     * @param newValue - value to change on Storage
+     */
+
+    var setStorageValue = function (newValue) {
+      setValue(newValue);
+      storage.setItem(key, newValue);
+    };
+
+    return [value, setStorageValue];
+  };
+
+  exports.useStorage = useStorage;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=index.umd.js.map
