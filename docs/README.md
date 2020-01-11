@@ -1,41 +1,80 @@
-**[[libraryNameWithSpacesAndUpperCases]](README.md)**
+[[libraryNameWithSpacesAndUpperCases]](README.md)
 
-[Globals](README.md)
+# [libraryNameWithSpacesAndUpperCases]
 
 ## Index
 
+### Interfaces
+
+* [IStorage](interfaces/istorage.md)
+
 ### Type aliases
 
-* [NumberParseable](README.md#numberparseable)
+* [Options](README.md#options)
 
 ### Functions
 
-* [isNumberParseable](README.md#const-isnumberparseable)
+* [useStorage](README.md#const-usestorage)
+
+### Object literals
+
+* [defaultOptions](README.md#const-defaultoptions)
 
 ## Type aliases
 
-###  NumberParseable
+###  Options
 
-Ƭ **NumberParseable**: *string | number | false | true & object*
+Ƭ **Options**: *object*
 
-*Defined in [index.ts:4](https://github.com/VitorLuizC/typescript-library-boilerplate/blob/696db7f/src/index.ts#L4)*
+*Defined in [index.ts:28](https://github.com/mechamobau/simplestorage/blob/6b9301e/src/index.ts#L28)*
 
-A Branded Type for values parseable to number.
+Options passed to the hook to decide what placeholder value and storage used
+
+#### Type declaration:
+
+* **placeholder**: *string*
+
+* **storage**? : *[IStorage](interfaces/istorage.md)*
 
 ## Functions
 
-### `Const` isNumberParseable
+### `Const` useStorage
 
-▸ **isNumberParseable**(`value`: unknown): *boolean*
+▸ **useStorage**(`key`: string, `options`: [Options](README.md#options)): *[null | string, setStorageValue]*
 
-*Defined in [index.ts:23](https://github.com/VitorLuizC/typescript-library-boilerplate/blob/696db7f/src/index.ts#L23)*
+*Defined in [index.ts:48](https://github.com/mechamobau/simplestorage/blob/6b9301e/src/index.ts#L48)*
 
-Check if value is parseable to number.
+React Hook used to get an interface with LocalStorage or another API. The
+params used are the `key` to access the value and `options` used to
+determinate the placeholder value and the storage API.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`value` | unknown |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`key` | string | - | Key used to access the LocalStorage value |
+`options` | [Options](README.md#options) |  defaultOptions | Options of **useStorage**  |
 
-**Returns:** *boolean*
+**Returns:** *[null | string, setStorageValue]*
+
+## Object literals
+
+### `Const` defaultOptions
+
+### ▪ **defaultOptions**: *object*
+
+*Defined in [index.ts:36](https://github.com/mechamobau/simplestorage/blob/6b9301e/src/index.ts#L36)*
+
+Default values for options in **useStorage**
+
+###  placeholder
+
+• **placeholder**: *string* = ""
+
+*Defined in [index.ts:38](https://github.com/mechamobau/simplestorage/blob/6b9301e/src/index.ts#L38)*
+
+###  storage
+
+• **storage**: *Storage* =  window.localStorage
+
+*Defined in [index.ts:37](https://github.com/mechamobau/simplestorage/blob/6b9301e/src/index.ts#L37)*
