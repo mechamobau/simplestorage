@@ -5,6 +5,8 @@
 [![Library minified size](https://badgen.net/bundlephobia/min/simplestorage)](https://bundlephobia.com/result?p=simplestorage)
 [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/simplestorage)](https://bundlephobia.com/result?p=simplestorage)
 
+The module to simplify the usage of Storage API in React.js
+
 ## Installation
 
 This library is published in the NPM registry and can be installed using any compatible package manager.

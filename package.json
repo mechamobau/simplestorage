@@ -1,7 +1,7 @@
 {
   "name": "simplestorage",
   "version": "0.0.0",
-  "description": "",
+  "description": "The module to simplify the usage of Storage API in React.js",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
