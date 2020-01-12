@@ -22,7 +22,7 @@ Interface used to mock the Storage API
 
 ▸ **getItem**(`key`: string): *string | null*
 
-*Defined in [index.ts:11](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L11)*
+*Defined in [index.ts:11](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L11)*
 
 Retrieves the value in Storage, if not exists return null
 
@@ -40,7 +40,7 @@ ___
 
 ▸ **removeItem**(`key`: string): *void*
 
-*Defined in [index.ts:22](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L22)*
+*Defined in [index.ts:22](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L22)*
 
 Remove the value at `key` passed
 
@@ -58,7 +58,7 @@ ___
 
 ▸ **setItem**(`key`: string, `value`: string): *void*
 
-*Defined in [index.ts:17](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L17)*
+*Defined in [index.ts:17](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L17)*
 
 Update the value on `key` passed
 
