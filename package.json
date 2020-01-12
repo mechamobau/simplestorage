@@ -1,6 +1,6 @@
 {
-  "name": "simplestorage",
-  "version": "0.0.0",
+  "name": "@mechamobau/simplestorage",
+  "version": "0.0.1",
   "description": "The module to simplify the usage of Storage API in React.js",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
@@ -44,8 +44,10 @@
   },
   "keywords": [
     "typescript",
-    "boilerplate",
-    "library"
+    "library",
+    "react",
+    "javascript",
+    "localstorage"
   ],
   "author": {
     "name": "Lucas Viana"

@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/mechamobau/simplestorage.svg?branch=master)](https://travis-ci.org/mechamobau/simplestorage)
 [![License](https://badgen.net/github/license/mechamobau/simplestorage)](./LICENSE)
-[![Library minified size](https://badgen.net/bundlephobia/min/simplestorage)](https://bundlephobia.com/result?p=simplestorage)
-[![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/simplestorage)](https://bundlephobia.com/result?p=simplestorage)
+[![Library minified size](https://badgen.net/bundlephobia/min/@mechamobau/simplestorage)](https://bundlephobia.com/result?p=@mechamobau/simplestorage)
+[![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/@mechamobau/simplestorage)](https://bundlephobia.com/result?p=@mechamobau/simplestorage)
 
 The module to simplify the usage of Storage API in React.js
 
@@ -24,10 +24,10 @@ This module has an UMD bundle available through JSDelivr and Unpkg CDNs.
 
 ```html
 <!-- For UNPKG use the code below. -->
-<script src="https://unpkg.com/simplestorage"></script>
+<script src="https://unpkg.com/@mechamobau/simplestorage"></script>
 
 <!-- For JSDelivr use the code below. -->
-<script src="https://cdn.jsdelivr.net/npm/simplestorage"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mechamobau/simplestorage"></script>
 
 <script>
   // UMD module is exposed through the "simpleStorage" global variable.
@@ -42,7 +42,7 @@ return `value` from Storage API and `setValue` change that value.
 
 ```javascript
 import React, { useState } from 'react';
-import { useStorage } from 'simplestorage';
+import { useStorage } from '@mechamobau/simplestorage';
 
 const Todo = () => {
   const [value, setValue] = useStorage('<YOUR-LOCAL-STORAGE-KEY>', {
