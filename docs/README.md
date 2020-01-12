@@ -26,7 +26,7 @@
 
 Ƭ **Options**: *object*
 
-*Defined in [index.ts:28](https://github.com/mechamobau/simplestorage/blob/0130b15/src/index.ts#L28)*
+*Defined in [index.ts:28](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L28)*
 
 Options passed to the hook to decide what placeholder value and storage used
 
@@ -42,7 +42,7 @@ Options passed to the hook to decide what placeholder value and storage used
 
 ▸ **useStorage**(`key`: string, `options`: [Options](README.md#options)): *[string, setStorageValue]*
 
-*Defined in [index.ts:48](https://github.com/mechamobau/simplestorage/blob/0130b15/src/index.ts#L48)*
+*Defined in [index.ts:48](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L48)*
 
 React Hook used to get an interface with LocalStorage or another API. The
 params used are the `key` to access the value and `options` used to
@@ -63,7 +63,7 @@ Name | Type | Default | Description |
 
 ### ▪ **defaultOptions**: *object*
 
-*Defined in [index.ts:36](https://github.com/mechamobau/simplestorage/blob/0130b15/src/index.ts#L36)*
+*Defined in [index.ts:36](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L36)*
 
 Default values for options in **useStorage**
 
@@ -71,10 +71,10 @@ Default values for options in **useStorage**
 
 • **placeholder**: *string* = ""
 
-*Defined in [index.ts:38](https://github.com/mechamobau/simplestorage/blob/0130b15/src/index.ts#L38)*
+*Defined in [index.ts:38](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L38)*
 
 ###  storage
 
 • **storage**: *Storage* =  window.localStorage
 
-*Defined in [index.ts:37](https://github.com/mechamobau/simplestorage/blob/0130b15/src/index.ts#L37)*
+*Defined in [index.ts:37](https://github.com/mechamobau/simplestorage/blob/2baef4a/src/index.ts#L37)*

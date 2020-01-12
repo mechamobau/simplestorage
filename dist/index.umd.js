@@ -1,5 +1,5 @@
 /*!
- * simplestorage v0.0.0
+ * @mechamobau/simplestorage v0.0.1
  * (c) Lucas Viana
  * Released under the MIT License.
  */
