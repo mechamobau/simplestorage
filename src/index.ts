@@ -25,7 +25,7 @@ interface IStorage {
 /**
  * Options passed to the hook to decide what placeholder value and storage used
  */
-type Options = {
+export type Options = {
   storage?: IStorage;
   placeholder: string;
 };
