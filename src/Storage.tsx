@@ -5,7 +5,7 @@ import { Options, useStorage } from './index';
 /**
  * Props of React Component **Storage**
  */
-type Props = {
+type Props<T> = {
   /**
    * Key used to access the LocalStorage value
    */
@@ -13,22 +13,22 @@ type Props = {
   /**
    * Which Storage API will be used for
    */
-  storage: Options['storage'];
+  storage: Options<T>['storage'];
   /**
    * Placeholder value which will be used in the case of blank value
    */
-  placeholder: Options['placeholder'];
+  placeholder: Options<T>['placeholder'];
   /**
    * Children with passed values
    */
-  children: (value: string, setValue: (newValue: string) => void) => ReactNode;
+  children: (value: T, setValue: (newValue: T) => void) => ReactNode;
 };
 
 /**
  * React Component created to be an interface with the Storage API.
  * @param props - Props of React Component **Storage**
  */
-const Storage = ({ key, storage, placeholder, children }: Props) => {
+const Storage = <T,>({ key, storage, placeholder, children }: Props<T>) => {
   const [value, setValue] = useStorage(key, { storage, placeholder });
 
   return children(value, setValue);
