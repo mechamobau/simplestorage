@@ -5,12 +5,13 @@ import localStorageMock from './__mocks__/localStorageMock';
 const useStateMock = useState as jest.Mock;
 
 jest.mock('react', () => ({
-  useState: jest.fn()
+  useState: jest.fn(),
+  useCallback: jest.fn((fn) => fn),
 }));
 
 Object.defineProperty(global, 'localStorage', {
   value: localStorageMock,
-  enumerable: true
+  enumerable: true,
 });
 
 describe('useStorage unit tests', () => {
@@ -27,7 +28,7 @@ describe('useStorage unit tests', () => {
     beforeEach(() => {
       useStateMock.mockImplementationOnce((fn: () => any) => [
         fn(),
-        setStateMock
+        setStateMock,
       ]);
 
       localStorageMock.getItem.mockReturnValueOnce(null);
@@ -52,11 +53,13 @@ describe('useStorage unit tests', () => {
     beforeEach(() => {
       useStateMock.mockImplementationOnce((fn: () => string) => [
         fn(),
-        setStateMock
+        setStateMock,
       ]);
 
       persistedValue = `persisted_value_${Math.random()}`;
-      localStorageMock.getItem.mockReturnValueOnce(persistedValue);
+      localStorageMock.getItem.mockReturnValueOnce(
+        JSON.stringify(persistedValue)
+      );
     });
 
     it('uses persisted value as initialState', () => {

@@ -1,4 +1,6 @@
-[[libraryNameWithSpacesAndUpperCases]](../README.md) › [IStorage](istorage.md)
+**[Simple Storage](../README.md)**
+
+> [Globals](../README.md) / IStorage
 
 # Interface: IStorage
 
@@ -13,60 +15,41 @@ Interface used to mock the Storage API
 ### Methods
 
 * [getItem](istorage.md#getitem)
-* [removeItem](istorage.md#removeitem)
 * [setItem](istorage.md#setitem)
 
 ## Methods
 
-###  getItem
+### getItem
 
-▸ **getItem**(`key`: string): *string | null*
+▸ **getItem**(`key`: string): string \| null
 
-*Defined in [index.ts:11](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L11)*
+*Defined in [IStorage.ts:9](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/IStorage.ts#L9)*
 
 Retrieves the value in Storage, if not exists return null
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `key` | string | Key used to access the Storage value  |
 
-**Returns:** *string | null*
+**Returns:** string \| null
 
 ___
 
-###  removeItem
+### setItem
 
-▸ **removeItem**(`key`: string): *void*
+▸ **setItem**(`key`: string, `value`: string): void
 
-*Defined in [index.ts:22](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L22)*
-
-Remove the value at `key` passed
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`key` | string | Key used to access the Storage value  |
-
-**Returns:** *void*
-
-___
-
-###  setItem
-
-▸ **setItem**(`key`: string, `value`: string): *void*
-
-*Defined in [index.ts:17](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L17)*
+*Defined in [IStorage.ts:16](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/IStorage.ts#L16)*
 
 Update the value on `key` passed
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `key` | string | Key used to access the Storage value |
 `value` | string | Value to be set  |
 
-**Returns:** *void*
+**Returns:** void

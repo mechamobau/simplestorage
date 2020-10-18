@@ -1,30 +1,10 @@
-/**
- * Interface used to mock the Storage API
- */
-interface IStorage {
-    /**
-     * Retrieves the value in Storage, if not exists return null
-     * @param key - Key used to access the Storage value
-     */
-    getItem(key: string): string | null;
-    /**
-     * Update the value on `key` passed
-     * @param key - Key used to access the Storage value
-     * @param value - Value to be set
-     */
-    setItem(key: string, value: string): void;
-    /**
-     * Remove the value at `key` passed
-     * @param key - Key used to access the Storage value
-     */
-    removeItem(key: string): void;
-}
+import type IStorage from './IStorage';
 /**
  * Options passed to the hook to decide what placeholder value and storage used
  */
-declare type Options = {
+export declare type Options<T> = {
     storage?: IStorage;
-    placeholder: string;
+    placeholder: T;
 };
 /**
  * React Hook used to get an interface with LocalStorage or another API. The
@@ -33,5 +13,5 @@ declare type Options = {
  * @param key - Key used to access the LocalStorage value
  * @param options - Options of **useStorage**
  */
-export declare const useStorage: (key: string, options?: Options) => readonly [string, (newValue: string) => void];
-export {};
+export declare const useStorage: <T>(key: string, { storage, placeholder }: Options<T>) => readonly [T, (newValue: T) => void];
+//# sourceMappingURL=index.d.ts.map

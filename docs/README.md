@@ -1,6 +1,8 @@
-[[libraryNameWithSpacesAndUpperCases]](README.md)
+**[Simple Storage](README.md)**
 
-# [libraryNameWithSpacesAndUpperCases]
+> Globals
+
+# Simple Storage
 
 ## Index
 
@@ -11,70 +13,141 @@
 ### Type aliases
 
 * [Options](README.md#options)
+* [Record](README.md#record)
+
+### Variables
+
+* [DEFAULT\_STORAGE](README.md#default_storage)
 
 ### Functions
 
-* [useStorage](README.md#const-usestorage)
-
-### Object literals
-
-* [defaultOptions](README.md#const-defaultoptions)
+* [getRecord](README.md#getrecord)
+* [updateRecord](README.md#updaterecord)
+* [useStorage](README.md#usestorage)
 
 ## Type aliases
 
-###  Options
+### Options
 
-Ƭ **Options**: *object*
+Ƭ  **Options**\<T>: { placeholder: T ; storage?: [IStorage](interfaces/istorage.md)  }
 
-*Defined in [index.ts:28](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L28)*
+*Defined in [index.ts:16](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/index.ts#L16)*
 
 Options passed to the hook to decide what placeholder value and storage used
 
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
 #### Type declaration:
 
-* **placeholder**: *string*
+Name | Type |
+------ | ------ |
+`placeholder` | T |
+`storage?` | [IStorage](interfaces/istorage.md) |
 
-* **storage**? : *[IStorage](interfaces/istorage.md)*
+___
+
+### Record
+
+Ƭ  **Record**\<T>: { empty: true  } \| { empty: false ; payload: T  }
+
+*Defined in [getRecord.ts:6](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/getRecord.ts#L6)*
+
+An union between empty and not empty records.
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+## Variables
+
+### DEFAULT\_STORAGE
+
+• `Const` **DEFAULT\_STORAGE**: [IStorage](interfaces/istorage.md) = window.localStorage
+
+*Defined in [index.ts:11](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/index.ts#L11)*
+
+The default value for storage is browser's local storage API.
 
 ## Functions
 
-### `Const` useStorage
+### getRecord
 
-▸ **useStorage**(`key`: string, `options`: [Options](README.md#options)): *[string, setStorageValue]*
+▸ `Const`**getRecord**\<T>(`key`: string, `storage`: [IStorage](interfaces/istorage.md)): [Record](README.md#record)\<T>
 
-*Defined in [index.ts:48](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L48)*
+*Defined in [getRecord.ts:13](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/getRecord.ts#L13)*
+
+Get an item from storage with its key and parse from JSON.
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`key` | string | IStorage's key. |
+`storage` | [IStorage](interfaces/istorage.md) | IStorage's implementation.  |
+
+**Returns:** [Record](README.md#record)\<T>
+
+___
+
+### updateRecord
+
+▸ `Const`**updateRecord**\<T>(`key`: string, `storage`: [IStorage](interfaces/istorage.md), `value`: T): void
+
+*Defined in [updateRecord.ts:9](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/updateRecord.ts#L9)*
+
+Stringify value to JSON and set as storage's item using key.
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`key` | string | IStorage's key. |
+`storage` | [IStorage](interfaces/istorage.md) | IStorage's implementation. |
+`value` | T | New value of record.  |
+
+**Returns:** void
+
+___
+
+### useStorage
+
+▸ `Const`**useStorage**\<T>(`key`: string, `__namedParameters`: { placeholder: T ; storage: [IStorage](interfaces/istorage.md) = DEFAULT\_STORAGE }): [T, (Anonymous function)]
+
+*Defined in [index.ts:28](https://github.com/VitorLuizC/simplestorage/blob/e191561/src/index.ts#L28)*
 
 React Hook used to get an interface with LocalStorage or another API. The
 params used are the `key` to access the value and `options` used to
 determinate the placeholder value and the storage API.
 
-**Parameters:**
+#### Type parameters:
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`key` | string | - | Key used to access the LocalStorage value |
-`options` | [Options](README.md#options) |  defaultOptions | Options of **useStorage**  |
+Name |
+------ |
+`T` |
 
-**Returns:** *[string, setStorageValue]*
+#### Parameters:
 
-## Object literals
+Name | Type | Description |
+------ | ------ | ------ |
+`key` | string | Key used to access the LocalStorage value |
+`__namedParameters` | { placeholder: T ; storage: [IStorage](interfaces/istorage.md) = DEFAULT\_STORAGE } | - |
 
-### `Const` defaultOptions
-
-### ▪ **defaultOptions**: *object*
-
-*Defined in [index.ts:36](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L36)*
-
-Default values for options in **useStorage**
-
-###  placeholder
-
-• **placeholder**: *string* = ""
-
-*Defined in [index.ts:38](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L38)*
-
-###  storage
-
-• **storage**: *Storage* =  window.localStorage
-
-*Defined in [index.ts:37](https://github.com/mechamobau/simplestorage/blob/acc184b/src/index.ts#L37)*
+**Returns:** [T, (Anonymous function)]

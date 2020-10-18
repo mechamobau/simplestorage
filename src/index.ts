@@ -45,10 +45,13 @@ export const useStorage = <T>(
    * Function to change the value inside the Storage and in the State of Hook.
    * @param newValue - value to change on Storage
    */
-  const setStorageValue = useCallback((newValue: T) => {
-    updateRecord(key, storage, newValue);
-    setValue(newValue);
-  }, [key, storage, setValue]);
+  const setStorageValue = useCallback(
+    (newValue: T) => {
+      updateRecord(key, storage, newValue);
+      setValue(newValue);
+    },
+    [key, storage, setValue]
+  );
 
   return [value, setStorageValue] as const;
 };
