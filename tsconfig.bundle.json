@@ -5,11 +5,13 @@
     "newLine": "LF",
     "noEmitOnError": true,
     "outDir": "dist/",
+    "sourceMap": true,
 
     // Configuration for type declarations.
     "declaration": true,
-    "declarationDir": "types/"
+    "declarationDir": "types/",
+    "declarationMap": true
   },
   "include": ["src/"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
+  "exclude": ["src/**/*.spec.ts", "src/__mocks__/"]
 }

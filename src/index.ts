@@ -1,41 +1,21 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
+import getRecord from './getRecord';
+import updateRecord from './updateRecord';
+
+import type IStorage from './IStorage';
 
 /**
- * Interface used to mock the Storage API
+ * The default value for storage is browser's local storage API.
  */
-interface IStorage {
-  /**
-   * Retrieves the value in Storage, if not exists return null
-   * @param key - Key used to access the Storage value
-   */
-  getItem(key: string): string | null;
-  /**
-   * Update the value on `key` passed
-   * @param key - Key used to access the Storage value
-   * @param value - Value to be set
-   */
-  setItem(key: string, value: string): void;
-  /**
-   * Remove the value at `key` passed
-   * @param key - Key used to access the Storage value
-   */
-  removeItem(key: string): void;
-}
+const DEFAULT_STORAGE: IStorage = window.localStorage;
 
 /**
  * Options passed to the hook to decide what placeholder value and storage used
  */
-export type Options = {
+export type Options<T> = {
   storage?: IStorage;
-  placeholder: string;
-};
-
-/**
- * Default values for options in **useStorage**
- */
-const defaultOptions: Options = {
-  storage: window.localStorage,
-  placeholder: ''
+  placeholder: T;
 };
 
 /**
@@ -45,26 +25,33 @@ const defaultOptions: Options = {
  * @param key - Key used to access the LocalStorage value
  * @param options - Options of **useStorage**
  */
-export const useStorage = (key: string, options: Options = defaultOptions) => {
-  const { storage = window.localStorage, placeholder } = options;
+export const useStorage = <T>(
+  key: string,
+  { storage = DEFAULT_STORAGE, placeholder }: Options<T>
+) => {
+  const [value, setValue] = useState<T>(() => {
+    const record = getRecord<T>(key, storage);
 
-  const [value, setValue] = useState<string>(() => {
-    const persistedValue = storage.getItem(key);
-    if (persistedValue === null) {
-      storage.setItem(key, placeholder);
-      return placeholder;
+    if (!record.empty) {
+      return record.payload;
     }
-    return persistedValue;
+
+    updateRecord(key, storage, placeholder);
+
+    return placeholder;
   });
 
   /**
    * Function to change the value inside the Storage and in the State of Hook.
    * @param newValue - value to change on Storage
    */
-  const setStorageValue = (newValue: string) => {
-    setValue(newValue);
-    storage.setItem(key, newValue);
-  };
+  const setStorageValue = useCallback(
+    (newValue: T) => {
+      updateRecord(key, storage, newValue);
+      setValue(newValue);
+    },
+    [key, storage, setValue]
+  );
 
   return [value, setStorageValue] as const;
 };

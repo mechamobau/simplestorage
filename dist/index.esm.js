@@ -3,16 +3,47 @@
  * (c) Lucas Viana
  * Released under the MIT License.
  */
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 /**
- * Default values for options in **useStorage**
+ * Get an item from storage with its key and parse from JSON.
+ * @param key - IStorage's key.
+ * @param storage - IStorage's implementation.
+ */
+var getRecord = function (key, storage) {
+  try {
+    var persistedValue = storage.getItem(key);
+    if (persistedValue !== null) { return {
+      empty: false,
+      payload: JSON.parse(persistedValue)
+    }; }
+    return {
+      empty: true
+    };
+  } catch (error) {
+    throw new Error("Can't get persisted value from storage or parse it from JSON.");
+  }
+};
+
+/**
+ * Stringify value to JSON and set as storage's item using key.
+ * @param key - IStorage's key.
+ * @param storage - IStorage's implementation.
+ * @param value - New value of record.
+ */
+var updateRecord = function (key, storage, value) {
+  try {
+    storage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    throw new Error("Can't stringify value to JSON or set it in the storage.");
+  }
+};
+
+/**
+ * The default value for storage is browser's local storage API.
  */
 
-var defaultOptions = {
-  storage: window.localStorage,
-  placeholder: ''
-};
+var DEFAULT_STORAGE = window.localStorage;
 /**
  * React Hook used to get an interface with LocalStorage or another API. The
  * params used are the `key` to access the value and `options` used to
@@ -21,33 +52,31 @@ var defaultOptions = {
  * @param options - Options of **useStorage**
  */
 
-var useStorage = function (key, options) {
-  if ( options === void 0 ) options = defaultOptions;
+var useStorage = function (key, ref) {
+  var storage = ref.storage; if ( storage === void 0 ) storage = DEFAULT_STORAGE;
+  var placeholder = ref.placeholder;
 
-  var storage = options.storage; if ( storage === void 0 ) storage = window.localStorage;
-  var placeholder = options.placeholder;
-  var ref = useState(function () {
-    var persistedValue = storage.getItem(key);
+  var ref$1 = useState(function () {
+    var record = getRecord(key, storage);
 
-    if (persistedValue === null) {
-      storage.setItem(key, placeholder);
-      return placeholder;
+    if (!record.empty) {
+      return record.payload;
     }
 
-    return persistedValue;
+    updateRecord(key, storage, placeholder);
+    return placeholder;
   });
-  var value = ref[0];
-  var setValue = ref[1];
+  var value = ref$1[0];
+  var setValue = ref$1[1];
   /**
    * Function to change the value inside the Storage and in the State of Hook.
    * @param newValue - value to change on Storage
    */
 
-  var setStorageValue = function (newValue) {
+  var setStorageValue = useCallback(function (newValue) {
+    updateRecord(key, storage, newValue);
     setValue(newValue);
-    storage.setItem(key, newValue);
-  };
-
+  }, [key, storage, setValue]);
   return [value, setStorageValue];
 };
 

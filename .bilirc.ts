@@ -4,21 +4,21 @@ const configuration: Configuration = {
   banner: true,
   input: 'src/index.ts',
   output: {
-    format: ['es', 'cjs', 'umd', 'umd-min'],
+    format: ['esm', 'cjs', 'umd', 'umd-min'],
     moduleName: 'simpleStorage',
-    sourceMap: true
+    sourceMap: true,
   },
   babel: {
-    minimal: true
+    minimal: true,
   },
   plugins: {
     typescript2: {
       clean: true,
       tsconfig: 'tsconfig.bundle.json',
-      useTsconfigDeclarationDir: true
-    }
+      useTsconfigDeclarationDir: true,
+    },
   },
-  externals: ['react']
+  externals: ['react'],
 };
 
 export default configuration;
