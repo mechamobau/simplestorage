@@ -9,11 +9,6 @@ jest.mock('react', () => ({
   useCallback: jest.fn((fn) => fn),
 }));
 
-Object.defineProperty(global, 'localStorage', {
-  value: localStorageMock,
-  enumerable: true,
-});
-
 describe('useStorage unit tests', () => {
   let key: string;
   let placeholder: string;
@@ -22,6 +17,10 @@ describe('useStorage unit tests', () => {
   beforeEach(() => {
     key = `key_${Math.random()}`;
     placeholder = `placeholder_${Math.random()}`;
+
+    // Clear mocks.
+    localStorageMock.getItem.mockClear();
+    localStorageMock.setItem.mockClear();
   });
 
   describe('Initializing when storage is empty', () => {
@@ -35,15 +34,18 @@ describe('useStorage unit tests', () => {
     });
 
     it('uses placeholder as initialState', () => {
-      useStorage(key, { placeholder: placeholder });
+      useStorage(key, { placeholder, storage: localStorageMock });
 
       expect(useStateMock).toHaveReturnedWith([placeholder, setStateMock]);
     });
 
     it('set placeholder on storage', () => {
-      useStorage(key, { placeholder });
+      useStorage(key, { placeholder, storage: localStorageMock });
 
-      expect(localStorageMock.setItem).toBeCalledWith(key, placeholder);
+      expect(localStorageMock.setItem).toBeCalledWith(
+        key,
+        JSON.stringify(placeholder)
+      );
     });
   });
 
@@ -57,13 +59,14 @@ describe('useStorage unit tests', () => {
       ]);
 
       persistedValue = `persisted_value_${Math.random()}`;
+
       localStorageMock.getItem.mockReturnValueOnce(
         JSON.stringify(persistedValue)
       );
     });
 
     it('uses persisted value as initialState', () => {
-      useStorage(key, { placeholder });
+      useStorage(key, { placeholder, storage: localStorageMock });
 
       expect(useStateMock).toHaveReturnedWith([persistedValue, setStateMock]);
     });
